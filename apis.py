@@ -15,7 +15,7 @@ def get_all_docs():
       totalHelmetsReturned = doc['totalHelmetsReturned'] + 1
     else : 
       totalHelmetsReturned = doc['totalHelmetsReturned']
-    myQuery = {"centreId" : some_json['centreId']}
+    myQuery = {"centreId" : some_json['centreId'], "updatedAt" : some_json['updatedAt']}
     doc = mongo.db.totalhelmetdata.update_one(myQuery, {"$set" : {"totalHelmetsReturned" : totalHelmetsReturned, "totalRidesCompleted" : totalRidesCompleted}})
     return jsonify({"message":"Data updated"})
   else :
