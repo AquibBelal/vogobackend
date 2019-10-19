@@ -2,7 +2,6 @@ from flask import Flask, request, url_for, jsonify
 from flask_pymongo import PyMongo 
 
 app = Flask(__name__)
-app.run(host='139.59.61.212')
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/vogohelmetsdata'
 mongo = PyMongo(app)
 
