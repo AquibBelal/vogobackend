@@ -9,11 +9,15 @@ mongo = PyMongo(app)
 def get_all_docs():
   if (request.method == 'POST') :
     some_json = request.get_json()
-    doc = mongo.db.totalhelmetdata.find_one({'centreId' : some_json['centreId']},{'_id' : 0})
+    print(some_json)
+    doc = mongo.db.totalhelmetdata.find_one({'centreId' : some_json['centreId'], 'updatedAt' : some_json['updatedAt']},{'_id' : 0})
+    # print(doc)
     totalRidesCompleted = doc['totalRidesCompleted'] + 1
     if (some_json['helmetReturned']) :
+      # totalRidesCompleted = doc['totalRidesCompleted'] + 1
       totalHelmetsReturned = doc['totalHelmetsReturned'] + 1
     else : 
+      # totalRidesCompleted = doc['totalRidesCompleted'] + 1
       totalHelmetsReturned = doc['totalHelmetsReturned']
     myQuery = {"centreId" : some_json['centreId'], "updatedAt" : some_json['updatedAt']}
     doc = mongo.db.totalhelmetdata.update_one(myQuery, {"$set" : {"totalHelmetsReturned" : totalHelmetsReturned, "totalRidesCompleted" : totalRidesCompleted}})
